@@ -60,6 +60,19 @@ class _ChooseLocationState extends State<ChooseLocation> {
       'weather': instance.weather,
     });
   }
+  void setupEverything(index) async {
+    WorldTime instance = timelocations[index];
+    await instance.getTime();
+    WorldWeather instance2 = weatherlocations[index];
+    await instance2.getWeather();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDaytime' : instance.isDaytime,
+      'weather': instance2.weather,
+    });
+  }
 
 
   @override
@@ -80,8 +93,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
             child: Card(
               child: ListTile(
                 onTap: (){
-                  updateTime(index);
-                  updateWeather(index);
+                  // updateTime(index);
+                  // updateWeather(index);
+                  setupEverything(index);
                 },
                 title: Text(timelocations[index].location.toString()),
                 leading: CircleAvatar(

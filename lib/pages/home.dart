@@ -14,9 +14,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    timedata = timedata.isNotEmpty ? timedata : ModalRoute.of(context)?.settings.arguments as Map;
+    timedata = timedata.isNotEmpty ? timedata : ModalRoute.of(context)!.settings.arguments as Map;
     print(timedata);
-    weatherdata = weatherdata.isNotEmpty ? weatherdata : ModalRoute.of(context)?.settings.arguments as Map;
+    weatherdata = weatherdata.isNotEmpty ? weatherdata : ModalRoute.of(context)!.settings.arguments as Map;
     print(weatherdata);
 
 
@@ -41,21 +41,7 @@ class _HomeState extends State<Home> {
               children: [
                 TextButton.icon(
                   onPressed: () async {
-                    dynamic result = await Navigator.pushNamed(context, '/location');
-                    setState(() {
-                      weatherdata = {
-                        'weather': result['weather'],
-                      };
-                    });
-                    setState(() {
-                      timedata = {
-                        'time' : result['time'],
-                        'location' : result['location'],
-                        'isDaytime': result['isDaytime'],
-                        'flag' : result['flag'],
-                      };
-
-                    });
+                    Navigator.pushReplacementNamed(context, '/location');
                   },
                   style: TextButton.styleFrom(
                     primary: Colors.black,

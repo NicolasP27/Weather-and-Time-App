@@ -11,9 +11,6 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
 
-
-
-
   void setupWorldTime() async {
     WorldTime instance = WorldTime(location:'Guatemala City', flag: 'guatemala.png', url: 'America/Guatemala',  );
     await instance.getTime();
@@ -31,17 +28,29 @@ class _LoadingState extends State<Loading> {
     await instance.getWeather();
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'weather': instance.weather,
-
-
     });
   }
 
+  void setupEverything() async {
+    WorldTime instance = WorldTime(location:'Guatemala City', flag: 'guatemala.png', url: 'America/Guatemala',  );
+    await instance.getTime();
+    WorldWeather instance2 = WorldWeather(city:'guatemala',);
+    await instance2.getWeather();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDaytime' : instance.isDaytime,
+      'weather': instance2.weather,
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    setupWorldTime();
-    setupWorldWeather();
+    // setupWorldTime();
+    // setupWorldWeather();
+    setupEverything();
   }
 
 
