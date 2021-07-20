@@ -32,16 +32,18 @@ class _LoadingState extends State<Loading> {
   }
 
   void setupEverything() async {
-    WorldTime instance = WorldTime(location:'Guatemala City', flag: 'guatemala.png', url: 'America/Guatemala',  );
-    await instance.getTime();
-    WorldWeather instance2 = WorldWeather(city:'guatemala',);
-    await instance2.getWeather();
+    WorldWeather instance = WorldWeather(city:'guatemala',);
+    await instance.getWeather();
+    print('1');
+    // WorldTime instance = WorldTime(location:'Guatemala City', flag: 'guatemala.png', url: 'America/Guatemala',  );
+    // print('3');
+    // await instance.getTime();
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'location': instance.location,
-      'flag': instance.flag,
+      'flag': 'guatemala.png',
       'time': instance.time,
       'isDaytime' : instance.isDaytime,
-      'weather': instance2.weather,
+      'weather': instance.weather,
     });
   }
 
