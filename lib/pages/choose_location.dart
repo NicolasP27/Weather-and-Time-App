@@ -13,7 +13,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
 
   List<WorldTime> timelocations = [
     WorldTime(url: 'Europe/London', location: 'London', flag: 'uk.png'),
-    WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+    WorldTime(url: 'Europe/Berlin', location: 'Berlin', flag: 'greece.png'),
     WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
     WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
     WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
@@ -61,19 +61,20 @@ class _ChooseLocationState extends State<ChooseLocation> {
     });
   }
   void setupEverything(index) async {
-    WorldTime instance = timelocations[index];
-    await instance.getTime();
-    WorldWeather instance2 = weatherlocations[index];
-    await instance2.getWeather();
+    WorldWeather instance = weatherlocations[index];
+    await instance.getWeather();
+    print('1');
+    // WorldTime instance = WorldTime(location:'Guatemala City', flag: 'guatemala.png', url: 'America/Guatemala',  );
+    // print('3');
+    // await instance.getTime();
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'location': instance.location,
-      'flag': instance.flag,
+      'flag': timelocations[index].flag,
       'time': instance.time,
       'isDaytime' : instance.isDaytime,
-      'weather': instance2.weather,
+      'weather': instance.weather,
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
